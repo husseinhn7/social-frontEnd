@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react'
-import Message from './message'
-import logo from "../imges/im.jpeg"
+import   { useEffect } from 'react'
 import Comment from './comment';
 import { IoSend } from "react-icons/io5";
 import { useState } from 'react';
 import { addComment, getAllComments } from '../api/commentsApi';
 import { useSelector } from 'react-redux';
-
+import { socket } from '../util/socket';
+import { useDispatch } from 'react-redux';
+import { addNotification } from '../store/notificationSlice';
 
 
 
 const Comments = ({postId, commentsData}) => {
+  const dispatch = useDispatch()
   const auth = useSelector((state) =>state.auth)
   const [comments , setComments] = useState([])
   const [commentData, setCommentData] = useState("")
@@ -25,6 +26,8 @@ const Comments = ({postId, commentsData}) => {
     const data = await res.data
      if (data){
       setCommentData("")
+      socket.emit("notification" , data)
+      dispatch(addNotification(data))
       console.log(commentsData)
       setComments((prev)=>{
         return [

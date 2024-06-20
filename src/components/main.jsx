@@ -11,8 +11,9 @@ import MobileNav from './mobileNav'
 
 
 const MainLayout = ({children}) => {
+  console.log(window.innerWidth, window.outerWidth) 
   return (
-    <div className='bg-[#0a0a0a] w-screen min-h-screen flex justify-center flex-col items-center '>
+    <div className='bg-[#0a0a0a] w-screen min-h-screen flex justify-center flex-col items-center lg:px-16 '>
 
     { children }
       

@@ -1,11 +1,11 @@
 import React from 'react'
 import Popup from './popup'
-import logo from "../imges/im.jpeg"
 import { useState, useRef } from 'react'
 import { CiImageOn } from "react-icons/ci";
 import { MdOutlineCancel } from "react-icons/md";
 import { Post } from '../api/postApi'
 import { useSelector } from 'react-redux'
+import {HOST } from "../util/host"
 
 
 const AddPost = ({personalImage, name}) => {
@@ -60,19 +60,27 @@ const AddPost = ({personalImage, name}) => {
  
     const res = await Post(formData, user)
     const json = await res.data
+    if(json){
+      setOpen(false)
+      setData({
+        text  : "",
+        image : null
+      })
+    }
     console.log(json)
   }
   return (
 
-    <div className=' bg-[#181818] flex rounded-2xl text-wrap md:w-[400px] sm:w-[200px] lg:w-[500px] m-3 border border-gray-600 h-16  items-center   p-2  mt-20  '>
-    <img src={`http://localhost:4000/${personalImage}`} className=' w-11 h-11 rounded-full'  /> 
+    <div className=' bg-[#181818] flex rounded-2xl text-wrap  w-full  border border-gray-600 h-16  items-center   p-2    '>
+    <img src={`${HOST}/${personalImage}`} className=' w-11 h-11 rounded-full'  /> 
 
     <button
       onClick={()=>setOpen(true)}
       className=' lg:w-96 h-12 sm:w-80 text-[#55585a]  text-left border-none  my-3   px-3 rounded-md hover:cursor-text' > whats on your mind ?</button>
+
     <Popup open={open} setOpen={setOpen}  >
-        <div className='p-3 bg-[#181818] flex rounded-2xl text-wrap  md:w-[400px] sm:w-[200px] lg:w-[500px] m-3 border border-[#383939]'>
-          <img src={`http://localhost:4000/${personalImage}`} className=' w-11   h-11 rounded-full'  /> 
+        <div className='p-3 bg-[#181818] flex rounded-2xl text-wrap  w-full m-3 border border-[#383939]'>
+          <img src={`${HOST}/${personalImage}`} className=' w-11   h-11 rounded-full'  /> 
             <div className=' ml-3 flex flex-col'> 
                 <h1 className=' text-slate-300'>{name}</h1>
                 <textarea 

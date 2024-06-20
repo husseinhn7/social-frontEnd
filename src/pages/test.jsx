@@ -3,6 +3,9 @@ import Popup from '../components/popup'
 import Login from "../components/login"
 import { useDispatch, useSelector } from 'react-redux'
 import { add, min } from '../store/testSilce'
+import Sock from '../components/sock'
+import Follower from '../components/follower'
+import Alert from '../components/alert'
 const Test = () => {
     const state2 = useSelector((state)=>state.test.value)
     const dispatch = useDispatch()
@@ -16,10 +19,13 @@ const Test = () => {
 
         <Popup open= {open} setOpen={setOpen}  >
           <Login />
+          <Alert />
+
 
         
         
         </Popup>
+  
     </div>
   )
 }

@@ -5,11 +5,16 @@ import { setCredentials, logout } from '../store/authSlice'
 import { Link } from 'react-router-dom'
 import { getLocalStorage, setLocalStorage } from '../util/localStorage'
 import { useNavigate } from 'react-router-dom'
-const Login = () => {
+import {   setSocketId } from '../store/socketSlice'
+import { socket } from '../util/socket'
+
+
+ const Login = () => {
+
   const navigate = useNavigate()
   const dispatcher = useDispatch()
   const authData = useSelector((state)=>state.auth)
-  
+   
   const [data, setData] = useState({
     email : "",
     password : ""
@@ -33,6 +38,8 @@ const Login = () => {
       setLocalStorage("user", loginData.user)
 
       dispatcher(setCredentials(loginData))
+      socket.connect()
+      // connect(loginData.user._id)
       navigate("/home")
     }
 

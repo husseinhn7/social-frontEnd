@@ -7,6 +7,7 @@ export const Post = async (data , user) =>{
         headers :{
             "Content-Type" : 'multipart/form-data',
             "Authorization" : `Bearer ${user.token}`
+            
         } 
     }  )
 }
@@ -14,7 +15,9 @@ export const Post = async (data , user) =>{
 export const getTimeLine = async (userId, token) =>{
     return await Api.get(`/api/post/${userId}`,{
         headers :{
-            "Authorization" : `Bearer ${token}`
+            "Authorization" : `Bearer ${token}`,
+            "bypass-tunnel-reminder": true
+
         } 
     } )
 }
@@ -24,18 +27,21 @@ export const getTimeLine = async (userId, token) =>{
 export const reactPost = async (userId, token) =>{
     return await Api.post(`/api/post/${userId}`,{},{
         headers :{
-            "Authorization" : `Bearer ${token}`
+            "Authorization" : `Bearer ${token}`,
+            "bypass-tunnel-reminder": true
+
+
         } 
     } )
 }
 
+export const getAllPosts = async (userId, token) =>{
+    return await Api.get(`/api/post/me/${userId}`,{
+        headers :{
+            "Authorization" : `Bearer ${token}`,
+            "bypass-tunnel-reminder": true
+        } 
+    })
+}
 
 
-// export const reactPost  = async (id, token) =>{
-//     console.log(token)
-//     return await Api.put(`/api/post/react/${id}`,{
-//         headers :{
-//             "Authorization" : `Bearer ${token}`
-//         } 
-//     } )
-// }

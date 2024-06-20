@@ -2,7 +2,7 @@ import React from 'react'
 
 const PageLabel = ({title}) => {
   return (
-    <label className='md:w-[400px] sm:w-[200px] lg:w-[500px] text-center text-xl fixed top-0 bg-[#0a0a0a] text-slate-300 p-3'>
+    <label className='w-full text-center text-xl  flex items-center justify-center bg-[#0a0a0a] text-slate-300 p-3 h-[5vh]'>
         {title} 
     </label>
   )
